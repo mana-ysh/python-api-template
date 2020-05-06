@@ -19,11 +19,7 @@ ci: typecheck test lint
 
 typecheck:
 	@echo check types
-	mypy ./ \
-		--disallow-untyped-defs \
-		--disallow-any-expr \
-		--no-implicit-optional \
-		--no-site-packages \
+	mypy ./python_api_template
 
 lint:
 	@echo check style
@@ -36,9 +32,6 @@ test:
 
 ##### application
 GUNICORN_CONFIG_PATH := config/gunicorn.py
-
-install:
-	poetry install
 
 launch:
 	gunicorn app:app -c ${GUNICORN_CONFIG_PATH}
