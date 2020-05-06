@@ -27,7 +27,7 @@ lint:
 
 test:
 	@echo testing
-	pytest -rf --cov=./
+	pytest -rf --cov=./python_api_template
 
 
 ##### application

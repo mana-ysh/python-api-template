@@ -27,6 +27,8 @@ def create_app() -> Flask:
     app.register_blueprint(dummy, url_prefix='/dummy')
     app.register_blueprint(api, url_prefix='/api')
 
+    print(type(app.test_client()))
+
     @app.route("/health")
     def health() -> Response:
         return jsonify({
