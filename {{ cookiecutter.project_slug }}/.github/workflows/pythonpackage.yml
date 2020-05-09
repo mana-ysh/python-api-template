@@ -1,3 +1,4 @@
+{% raw -%}
 # This workflow will install Python dependencies, run tests and lint with a variety of Python versions
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
@@ -26,8 +27,15 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install cookiecutter flake8 pytest mypy
+        pip install flake8 pytest mypy
         pip install .
-    - name: CI
+    - name: Lint
       run: |
-        make create-project-no-input && make ci
+        make lint
+    - name: Test
+      run: |
+        make test
+    - name: Type checking
+      run: |
+        make typecheck
+{%- endraw %}

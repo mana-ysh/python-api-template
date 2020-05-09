@@ -5,7 +5,7 @@ from flask import Flask
 from flask.testing import FlaskClient
 import pytest
 
-from python_api_template.controller import create_app
+from {{ cookiecutter.project_slug }}.controller import create_app
 
 
 @pytest.fixture
