@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "python-api-template"
+name = "{{ cookiecutter.project_slug }}"
 version = "0.1.0"
-description = "api template for python"
+description = "{{ cookiecutter.description }}"
 authors = ["mana-ysh <int.toshi13@gmail.com>"]
 
 [tool.poetry.dependencies]

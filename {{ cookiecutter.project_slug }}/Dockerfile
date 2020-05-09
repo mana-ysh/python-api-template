@@ -13,8 +13,6 @@ COPY . /app
 
 WORKDIR /app
 
-# update to avoid 'setup.py' not found error
-# RUN pip3 install -U pip
 RUN pip3 install .
 
 RUN rm -rf /var/lib/apt/lists/*
