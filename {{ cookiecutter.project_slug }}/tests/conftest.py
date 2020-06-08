@@ -1,21 +1,20 @@
 
 from typing import Generator
 
-from flask import Flask
-from flask.testing import FlaskClient
+from fastapi import FastAPI
+from fastapi.testclient import TestClient
 import pytest
 
 from {{ cookiecutter.project_slug }}.controller import create_app
 
 
 @pytest.fixture
-def app() -> Generator[Flask, None, None]:
+def app() -> Generator[FastAPI, None, None]:
     app = create_app()
-    app.config['TESTING'] = True
     yield app
 
 
 @pytest.fixture
-def client(app: Flask) -> FlaskClient:
+def client(app: FastAPI) -> TestClient:
     """A test client for the app."""
-    return app.test_client()
+    yield TestClient(app)

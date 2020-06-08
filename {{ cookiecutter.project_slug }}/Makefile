@@ -1,8 +1,8 @@
 ##### docker
-IMAGE_NAME := {{ cookiecutter.project_slug }} 
+IMAGE_NAME := {{ cookiecutter.project_slug }}
 CONTAINER_NAME := ${IMAGE_NAME}-container
 SRC_PORT := 4600
-DST_PORT := 9876
+DST_PORT := 8000
 
 build-image:
 	docker build -t ${IMAGE_NAME} ./
@@ -30,10 +30,8 @@ test:
 
 
 ##### application
-GUNICORN_CONFIG_PATH := config/gunicorn.py
-
 launch:
-	gunicorn app:app -c ${GUNICORN_CONFIG_PATH}
+	uvicorn app:app --host 0.0.0.0 --port ${DST_PORT}
 
 launch-develop:
 	python app.py
