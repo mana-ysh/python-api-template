@@ -1,38 +1,33 @@
 
-from flask import Blueprint, Flask, jsonify
-from flask.wrappers import Response
+from fastapi import APIRouter, FastAPI
+from pydantic import BaseModel
 
 
-dummy = Blueprint('dummy', __name__)
-api = Blueprint('api', __name__)
+api_v1_router = APIRouter()
 
 
-@dummy.route('/', methods=["GET"])
-def dummy_home() -> Response:
-    return jsonify({
-        "msg": "hello {}".format(dummy.name)
-    })
+class MessageResponse(BaseModel):
+    msg: str
 
 
-@api.route('/', methods=["GET"])
-def api_home() -> Response:
-    return jsonify({
-        "msg": "hey {}".format(api.name)
-    })
+@api_v1_router.get("/dummy")
+def dummy() -> MessageResponse:
+    return MessageResponse(
+        msg="I'm dummy"
+    )
 
 
-def create_app() -> Flask:
-    app = Flask(__name__)
-    app.url_map.strict_slashes = False
-    app.register_blueprint(dummy, url_prefix='/dummy')
-    app.register_blueprint(api, url_prefix='/api')
+def create_app() -> FastAPI:
+    app = FastAPI(
+        title="App"
+    )
 
-    print(type(app.test_client()))
+    app.include_router(api_v1_router, prefix="/api/v1")
 
-    @app.route("/health")
-    def health() -> Response:
-        return jsonify({
-            "msg": "I'm healthy"
-        })
+    @app.get("/health")
+    def health() -> MessageResponse:
+        return MessageResponse(
+            msg="I'm healthy"
+        )
 
     return app
