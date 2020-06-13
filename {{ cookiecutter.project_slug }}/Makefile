@@ -1,8 +1,9 @@
+SRC_PORT := 4600
+DST_PORT := 8000
+
 ##### docker
 IMAGE_NAME := {{ cookiecutter.project_slug }}
 CONTAINER_NAME := ${IMAGE_NAME}-container
-SRC_PORT := 4600
-DST_PORT := 8000
 
 build-image:
 	docker build -t ${IMAGE_NAME} ./
@@ -12,6 +13,7 @@ run-container:
 		--name ${CONTAINER_NAME} \
 		-p ${SRC_PORT}:${DST_PORT} \
 		${IMAGE_NAME}
+
 
 ##### ci
 ci: typecheck test lint
@@ -28,6 +30,20 @@ test:
 	@echo testing
 	pytest -rf --cov=./{{ cookiecutter.project_slug }} 
 
+
+##### k8s
+MANIFEST_PATH = $(shell pwd)/k8s
+ENVIRONMENT := local
+
+deploy:
+	kubectl apply -k ${MANIFEST_PATH}/overlays/${ENVIRONMENT}/
+
+# TODO: prevent operation mistaken
+destory:
+	kubectl delete -k ${MANIFEST_PATH}/overlays/${ENVIRONMENT}/
+
+port-forward:
+	kubectl port-forward service/{{ cookiecutter.project_slug | kebabcase }}-service ${SRC_PORT}:${DST_PORT}
 
 ##### application
 launch:

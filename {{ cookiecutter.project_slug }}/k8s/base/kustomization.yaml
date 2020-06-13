@@ -1,0 +1,8 @@
+namespace: default
+namePrefix: "{{ cookiecutter.project_slug | kebabcase }}-"
+commonLabels:
+    app: {{ cookiecutter.project_slug | kebabcase }}
+resources:
+- configmap.yaml
+- deployment.yaml
+- service.yaml
