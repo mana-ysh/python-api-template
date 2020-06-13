@@ -13,6 +13,14 @@ spec:
       - name: {{ cookiecutter.project_slug | kebabcase }}
         image: {{ cookiecutter.project_slug }}
         imagePullPolicy: Never
+        livenessProbe:
+            httpGet:
+                port: 8000
+                path: /health
+        readinessProbe:
+            httpGet:
+                port: 8000
+                path: /health
         ports:
         - containerPort: 8000
         envFrom:
