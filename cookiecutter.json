@@ -1,4 +1,5 @@
 {
     "project_slug": "python_api_template",
-    "description": "hoge"
+    "description": "hoge",
+    "_extensions": ["kamidana.extensions.NamingModuleExtension"]
 }
