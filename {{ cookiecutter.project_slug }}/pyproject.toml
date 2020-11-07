@@ -10,6 +10,7 @@ dacite = "^1.5.0"
 pyyaml = "^5.3.1"
 fastapi = "^0.55.1"
 uvicorn = "^0.11.5"
+requests = "^2.24.0"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.7.9"

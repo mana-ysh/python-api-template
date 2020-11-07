@@ -16,19 +16,21 @@ run-container:
 
 
 ##### ci
+POETRY_RUN := poetry run
+
 ci: typecheck test lint
 
 typecheck:
 	@echo check types
-	mypy ./{{ cookiecutter.project_slug }} 
+	${POETRY_RUN} mypy ./{{ cookiecutter.project_slug }} 
 
 lint:
 	@echo check style
-	flake8 --show-source --statistics
+	${POETRY_RUN} flake8 --show-source --statistics
 
 test:
 	@echo testing
-	pytest -rf --cov=./{{ cookiecutter.project_slug }} 
+	${POETRY_RUN} pytest -rf --cov=./{{ cookiecutter.project_slug }} 
 
 
 ##### k8s
