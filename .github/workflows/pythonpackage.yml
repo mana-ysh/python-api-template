@@ -31,4 +31,4 @@ jobs:
         cd dummy && pip install .
     - name: CI
       run: |
-        make ci PROJECT_NAME=dummy
+        make ci PROJECT_NAME=dummy POETRY_RUN=
