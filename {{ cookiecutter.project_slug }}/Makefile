@@ -18,7 +18,7 @@ run-container:
 ##### ci
 POETRY_RUN := poetry run
 
-ci: typecheck test lint
+ci: lint typecheck test
 
 typecheck:
 	@echo check types
@@ -26,12 +26,17 @@ typecheck:
 
 lint:
 	@echo check style
+	${POETRY_RUN} isort --profile black --check .
 	${POETRY_RUN} flake8 --show-source --statistics
+	${POETRY_RUN} black --check .
 
 test:
 	@echo testing
 	${POETRY_RUN} pytest -rf --cov=./{{ cookiecutter.project_slug }} 
 
+fmt:
+	${POETRY_RUN} isort --profile black .
+	${POETRY_RUN} black .
 
 ##### k8s
 MANIFEST_PATH = $(shell pwd)/k8s

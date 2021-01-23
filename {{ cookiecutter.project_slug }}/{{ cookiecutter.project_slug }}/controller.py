@@ -1,7 +1,6 @@
 from fastapi import APIRouter, FastAPI
 from pydantic import BaseModel
 
-
 api_v1_router = APIRouter()
 
 
