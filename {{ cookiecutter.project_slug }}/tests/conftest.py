@@ -1,11 +1,11 @@
 
 from typing import Generator
 
+import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
-import pytest
 
-from {{ cookiecutter.project_slug }}.controller import create_app
+from {{cookiecutter.project_slug}}.controller import create_app
 
 
 @pytest.fixture

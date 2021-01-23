@@ -1,9 +1,9 @@
 
 import os
+
 import uvicorn
 
-from {{ cookiecutter.project_slug }}.controller import create_app
-
+from {{cookiecutter.project_slug}}.controller import create_app
 
 app = create_app()
 
